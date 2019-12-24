@@ -1,6 +1,6 @@
 # Jugando con paletas de colores
-|Vista|
-|---|
-|![screen1.png](screen1.png)|
+|Vista|Detalles|
+|---|--|
+|![screen1.png](screen1.png)||
 
 
