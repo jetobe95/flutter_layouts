@@ -6,7 +6,8 @@ Video tutorial flutter app
 
 
 ## Resultados 
-!['Screen 1'](./screen1.png)
-!['Screen 1'](./screen2.png)
+|Vista 1|Vista 2|
+|---|---|
+|!['Screen 1'](./screen1.png) | !['Screen 1'](./screen2.png)\
 
 
