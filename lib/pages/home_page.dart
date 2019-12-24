@@ -1,6 +1,7 @@
 import 'package:flight_tickets/clip/custom_shape_clipper.dart';
 import 'package:flight_tickets/images_assets.dart';
 import 'package:flight_tickets/models/city_card_model.dart';
+import 'package:flight_tickets/pages/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 Color firstColor = Color(0xfff47b15);
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CustomBottomBar(),
       // appBar: AppBar(
       //   title: Text('Vuelos'),
       // ),
@@ -36,21 +38,21 @@ class HomeScreenBottomPart extends StatelessWidget {
         assetImage: Images.athens,
         cityName: 'Atenas',
         discount: '50%',
-        monthYear: '2019',
+        monthYear: 'Mar 2019',
         newPrice: '\$10,000',
         oldPrice: '\$20,000'),
     CityCardModel(
         assetImage: Images.lasvegas,
         cityName: 'Las Vegas',
         discount: '20%',
-        monthYear: '2019',
+        monthYear: 'Feb 2019',
         newPrice: '\$40,000',
         oldPrice: '\$50,000'),
     CityCardModel(
         assetImage: Images.sydney,
         cityName: 'Sydney',
         discount: '90%',
-        monthYear: '2019',
+        monthYear: 'Jan 2019',
         newPrice: '\$20,000',
         oldPrice: '\$200.000'),
   ];
@@ -64,7 +66,10 @@ class HomeScreenBottomPart extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Text('Currently Watched items'),
+              Text(
+                'Currently Watched items',
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+              ),
               Spacer(),
               Text(
                 'View All (12)',
@@ -72,17 +77,20 @@ class HomeScreenBottomPart extends StatelessWidget {
               )
             ],
           ),
+          SizedBox(
+            height: 20.0,
+          ),
           Container(
-            height: 210,
+            height: 280,
             child: ListView.builder(
               itemCount: cityCards.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Container(
-                  height: 210,
-                  width: 100,
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(10),
+                  // height: 210,
+                  width: 200,
+                  margin: EdgeInsets.only(right: 20.0),
+                  // padding: EdgeInsets.all(10),
                   child: _buildCityCard(cityCards[index]),
                 );
               },
@@ -95,10 +103,102 @@ class HomeScreenBottomPart extends StatelessWidget {
 
   Widget _buildCityCard(CityCardModel cityCardModel) {
     return Container(
-      child: Stack(
+      child: Column(
         children: <Widget>[
-          Image(
-            image: cityCardModel.assetImage,
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    child: Image(
+                      image: cityCardModel.assetImage,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(15.0)),
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                          Colors.black12,
+                          Colors.black,
+                        ])),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          cityCardModel.cityName,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 22.0),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              cityCardModel.monthYear,
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.8),
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 14.0, vertical: 5.0),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    color: Colors.white),
+                                child: Text(
+                                  cityCardModel.discount,
+                                  style: TextStyle(
+                                      fontSize: 15.0,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w800),
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                cityCardModel.newPrice,
+                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Text(
+                "(${cityCardModel.oldPrice})",
+                style: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.lineThrough),
+              ),
+            ],
           )
         ],
       ),
