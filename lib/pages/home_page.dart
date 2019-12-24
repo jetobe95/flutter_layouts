@@ -2,6 +2,7 @@ import 'package:flight_tickets/clip/custom_shape_clipper.dart';
 import 'package:flight_tickets/images_assets.dart';
 import 'package:flight_tickets/models/city_card_model.dart';
 import 'package:flight_tickets/pages/custom_bottom_bar.dart';
+import 'package:flight_tickets/pages/flight_listing_page.dart';
 import 'package:flutter/material.dart';
 
 Color firstColor = Color(0xfff47b15);
@@ -125,14 +126,15 @@ class HomeScreenBottomPart extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(15.0)),
+                        borderRadius: BorderRadius.vertical(
+                            bottom: Radius.circular(15.0)),
                         gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                          Colors.black12,
-                          Colors.black,
-                        ])),
+                              Colors.black12,
+                              Colors.black,
+                            ])),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -266,9 +268,14 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                             elevation: 2.0,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(30.0)),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
+                            child: InkWell(
+                              onTap: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>FlightListingPage()));
+                              },
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
