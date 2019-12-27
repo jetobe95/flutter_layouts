@@ -42,6 +42,15 @@ class _PlayerPageState extends State<PlayerPage> {
             ),
           ),
           Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.16),
+                  blurRadius: 10.0,
+                  spreadRadius: 3.0
+                )
+              ]
+            ),
             margin: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
             width: double.infinity,
             child: Image.network(
